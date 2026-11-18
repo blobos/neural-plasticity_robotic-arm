@@ -1,0 +1,27 @@
+[project]
+name = "neural-plasticity-robotics"
+version = "0.1.0"
+description = "Pilot experiments on plasticity loss in online learners for a drifting robot-arm dynamics stream"
+requires-python = ">=3.11"
+dependencies = [
+    "matplotlib>=3.8",
+    "numpy>=2.0",
+    "pandas>=2.2",
+    "torch==2.6.0",
+    "jupyterlab>=4.2",
+    "nbconvert>=7.16",
+    "ipykernel>=6.29",
+]
+
+# CPU-only torch (2.15+cu132) cannot initialise on the 550.x driver (CUDA 12.4):
+# it needs a CUDA 12.x build. cu124 matches the driver exactly.
+[[tool.uv.index]]
+name = "pytorch-cu124"
+url = "https://download.pytorch.org/whl/cu124"
+explicit = true
+
+[tool.uv.sources]
+torch = { index = "pytorch-cu124" }
+
+[tool.uv]
+package = false
